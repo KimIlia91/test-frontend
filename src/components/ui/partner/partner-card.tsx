@@ -36,7 +36,7 @@ export default function PartnerCard({
                 setTrigger(false)
             })
         }
-    }, [trigger])
+    }, [trigger, isLike, id])
 
     const onSetIsLike = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
