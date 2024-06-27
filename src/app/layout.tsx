@@ -4,8 +4,8 @@ import "../styles/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | IT HUB',
-    default: 'IT HUB',
+    template: '%s | Antipoff IT',
+    default: 'Antipoff IT',
   },
   description: 'Тестовое задание.',
   metadataBase: new URL('https://it-hub.vercel.sh'),
