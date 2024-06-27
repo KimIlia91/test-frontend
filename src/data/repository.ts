@@ -1,11 +1,13 @@
 'use server'
 
 import { sql } from "@vercel/postgres"
+import { unstable_noStore as noStore } from 'next/cache'
 import { Partner, PartnersTable, User, UserProfile } from "@/lib/definitions"
 import { auth } from "@/auth";
 
 
 export async function getUserByEmail(email: string): Promise<User | undefined> {
+    noStore()
     try {
       const user = await sql<User>`SELECT * FROM test_users WHERE email=${email}`
       return user.rows[0];
@@ -16,6 +18,7 @@ export async function getUserByEmail(email: string): Promise<User | undefined> {
 }
 
 export async function addUser(name: string, email: string, hashPassword: string) {
+    noStore()
     try {
         await sql`
             INSERT INTO test_users (name, email, password)
@@ -28,6 +31,7 @@ export async function addUser(name: string, email: string, hashPassword: string)
 }
 
 export async function fetchPartnersTable(offset: number) {
+    noStore()
     try {
         const session = await auth()
         const userId = session?.user?.id!
@@ -56,6 +60,7 @@ export async function fetchPartnersTable(offset: number) {
 }
 
 export async function fetchPartnersPerPage(offset: number) {
+    noStore()
     try {
         const count = await sql`
             SELECT COUNT(*)
@@ -79,6 +84,7 @@ export async function fetchPartnersPerPage(offset: number) {
 }
 
 export async function createUserFavorite(userId: string, partnerId: string) {
+    noStore()
     try {
         await sql`
             INSERT INTO users_favorites (user_id, partner_id)
@@ -91,6 +97,7 @@ export async function createUserFavorite(userId: string, partnerId: string) {
 }
 
 export async function deleteUserFavorite(userId: string, partnerId: string) {
+    noStore()
     try {
         await sql`
             DELETE FROM users_favorites 
@@ -103,6 +110,7 @@ export async function deleteUserFavorite(userId: string, partnerId: string) {
 }
 
 export async function fetchPartnerById(id: string) {
+    noStore()
     try {
         console.log(id)
         const partner = await sql<Partner>`
@@ -125,6 +133,7 @@ export async function fetchPartnerById(id: string) {
 }
 
 export async function featchUserProfile() {
+    noStore()
     try {
         const session = await auth()
         const userId = session?.user?.id!

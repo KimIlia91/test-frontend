@@ -47,8 +47,6 @@ export default function PartnerCard({
         router.push(`/partner/${id}`)
     }
 
-    console.log("render card")
-
     return (
         <li
             key={`partner-${id}`}
