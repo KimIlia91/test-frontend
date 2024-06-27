@@ -48,6 +48,8 @@ const PartnerTable = ({
         setOffset(offset => offset + 8)
     }
 
+    console.log("render list")
+
     return (
         <div className="flex flex-col items-center gap-14">
             {partners.length === 0 ? (

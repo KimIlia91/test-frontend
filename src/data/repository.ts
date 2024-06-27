@@ -21,8 +21,8 @@ export async function addUser(name: string, email: string, hashPassword: string)
     noStore()
     try {
         await sql`
-            INSERT INTO test_users (name, email, password)
-            VALUES (${name}, ${email}, ${hashPassword})
+            INSERT INTO test_users (name, email, password, image)
+            VALUES (${name}, ${email}, ${hashPassword}, "")
         `
     } catch(error) {
         console.error('Failed to create user:', error)
