@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
-import { roboto } from "@/fonts";
-import "../styles/globals.css";
+import { SessionProvider } from "next-auth/react";
+import type { Metadata } from "next"
+import { roboto } from "@/fonts"
+import "../styles/globals.css"
 
 export const metadata: Metadata = {
   title: {
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={roboto.className}>
-        {children}
+        <SessionProvider>
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );

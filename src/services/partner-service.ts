@@ -3,7 +3,7 @@
 import { auth } from "@/auth"
 import { createUserFavorite, deleteUserFavorite, fetchPartnersPerPage } from "@/data/repository"
 
-export async function isLastPartners(offset: number) {
+export async function isLastPartners(offset: number) : Promise<boolean> {
     const count = await fetchPartnersPerPage(offset)
     return count > 8
 }

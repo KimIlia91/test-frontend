@@ -30,11 +30,9 @@ export async function addUser(name: string, email: string, hashPassword: string)
     }
 }
 
-export async function fetchPartnersTable(offset: number) {
+export async function fetchPartnersTable(userId: string, offset: number) : Promise<PartnersTable[]> {
     noStore()
     try {
-        const session = await auth()
-        const userId = session?.user?.id!
         const partners = await sql<PartnersTable>`
             SELECT
                 p.id,

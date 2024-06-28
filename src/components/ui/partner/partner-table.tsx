@@ -8,21 +8,24 @@ import { Button } from "@/components/ui/button"
 import { PartnersTable } from "@/lib/definitions"
 import { fetchPartnersTable } from "@/data/repository"
 import { isLastPartners } from "@/services/partner-service"
+import { useSession } from "next-auth/react"
 
 type PartnerTableProps = {
 }
 
 const PartnerTable = ({
 }: PartnerTableProps) => {
-
+    const { data: session, status } = useSession()
     const [partners, setPartners] = useState<PartnersTable[]>([])
     const [offset, setOffset] = useState(0)
     const [hasMore, setHasMore] = useState(true)
     const [loading, setLoading] = useState(true)
     
     useEffect(() => {
-        onRequest(0)
-    }, []);
+        if (status === "authenticated") {
+            onRequest(0);
+        }
+    }, [status]);
 
     useEffect(() => {
         onRequest(offset)
@@ -30,7 +33,7 @@ const PartnerTable = ({
 
     const onRequest = (offset:number) => {
         Promise.all([
-            fetchPartnersTable(offset),
+            fetchPartnersTable(session?.user?.id!, offset),
             isLastPartners(offset)
         ]).then(([newPartners, hasMoreResult]) => {
             setPartners([...partners, ...newPartners])
