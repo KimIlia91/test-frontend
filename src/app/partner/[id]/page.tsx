@@ -35,7 +35,7 @@ export default async function PartnerPage({
     <main className='pb-[69px]'>
       <Header>
         <BackButton />
-        <div className="flex flex-col md:flex-row items-center text-white md:pt-0 gap-4 md:pl-16 lg:pl-52">
+        <div className="flex flex-col md:flex-row items-center text-white pt-8 md:pt-0 gap-4 md:pl-24 lg:pl-52">
           <Image 
             src={`${partner.image}`}
             width={128}
@@ -51,7 +51,7 @@ export default async function PartnerPage({
         <ProfilePanel />
       </Header>
       <div className='container'>
-        <div className='flex w-full text-base flex-col md:flex-row max-w-[1440px] gap-4 md:gap-[129px] sm:pl-16 lg:pl-52'>
+        <div className='flex w-full text-base flex-col md:flex-row max-w-[1440px] gap-4 md:gap-[129px] md:pl-24 lg:pl-52'>
           <p className='max-w-[630px] order-2 md:order-1'>{partner.description}</p>
           <div className='flex gap-6 flex-col text-nowrap order-1 md:order-2'>
             <div className='flex gap-2'>

@@ -13,7 +13,7 @@ export default async function ProfilePage() {
     <main>
       <Header>
         <BackButton />
-        <div className="flex flex-col md:flex-row items-center text-white md:pt-0 gap-4 md:pl-16 lg:pl-52">
+        <div className="flex flex-col md:flex-row items-center text-white md:pt-0 gap-4 md:pl-24 lg:pl-52">
           <div className='order-1 md:order-2'>
             <p className="text-xl leading-6 max-w-[846px] text-center md:text-start">Профиль</p>
             <h1 className="text-4xl md:text-[64px] md:leading-[75px] leading-10">{user.name}</h1>
@@ -32,7 +32,7 @@ export default async function ProfilePage() {
     </div>
       </Header>
       <div className='container'>
-        <div className='flex items-start flex-wrap gap-10 md:pl-16 lg:pl-52'>
+        <div className='flex items-start flex-wrap gap-10 md:pl-24 lg:pl-52'>
           <Image 
             src={`${user.image}`}
             width={128}

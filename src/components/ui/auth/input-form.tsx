@@ -33,7 +33,7 @@ export default function InputForm({
                 type={type}
                 placeholder={placeholder}
                 autoComplete={autoComplete}
-                className={`bg-[#F8F8F8] py-3 pl-2 pr-4 h-[48px] rounded-md text-[16px] focus-visible:border-gray-500 ${errors ? "border-red-600 border-2" : ""}`}
+                className={`bg-[#F8F8F8] py-3 pl-2 pr-10 h-[48px] rounded-md text-[16px] focus-visible:border-gray-500 ${errors ? "border-red-600 border-2" : ""}`}
             />
             {children && (
                 <div className="absolute right-2 top-[55%]">
