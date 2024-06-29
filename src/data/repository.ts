@@ -22,7 +22,7 @@ export async function addUser(name: string, email: string, hashPassword: string)
     try {
         await sql`
             INSERT INTO test_users (name, email, password, image)
-            VALUES (${name}, ${email}, ${hashPassword}, "")
+            VALUES (${name}, ${email}, ${hashPassword}, '/users/unknown-person.jpeg')
         `
     } catch(error) {
         console.error('Failed to create user:', error)
