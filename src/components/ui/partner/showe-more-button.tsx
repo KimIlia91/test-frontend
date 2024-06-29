@@ -4,8 +4,9 @@ import { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../button'
-import { ShowMoreRowDown } from '@/assets'
 import { RootState } from '@/store'
+import { ShowMoreRowDown } from '@/assets'
+import { DEFAULT_CURSOR } from '@/lib/constants'
 import { setPartnersTable } from '@/store/partner/partner-slice'
 import { getPartnersTablePage } from '@/services/partner-service'
 
@@ -14,7 +15,7 @@ const ShoweMoreButton = () => {
     const { loading, hasNextPage, cursor } = useSelector((state: RootState) => state.partnersTable)
     const session = useSession()
 
-    const request = () => {
+    const request = (cursor: string = DEFAULT_CURSOR) => {
         if (session.status === "authenticated") {
             getPartnersTablePage(cursor, session.data?.user?.id!)
             .then(({partners, hasNextPartnersPage}) => 
@@ -31,7 +32,7 @@ const ShoweMoreButton = () => {
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.preventDefault()
-        request()
+        request(cursor)
     }
     
     return (
