@@ -1,5 +1,9 @@
+import { Metadata } from 'next'
 import Spinner from '@/components/ui/spinner'
-import React from 'react'
+
+export const metadata: Metadata = {
+  title: 'Загрузка...',
+}
 
 export default function Loading() {
   return (

@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata } from 'next'
 import { NotFoundImage } from '@/assets'
 
+export const metadata: Metadata = {
+  title: 'Не найдено',
+}
 
 export default function NotFound() {
     return (

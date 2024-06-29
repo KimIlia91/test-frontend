@@ -1,5 +1,10 @@
 import Image from "next/image"
+import { Metadata } from 'next'
 import { InternalServerErrorImage } from "@/assets"
+
+export const metadata: Metadata = {
+  title: '500',
+}
 
 export default function InternalError() {
     return (
