@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
-import NotFound from '@/app/not-found'
+import NotFound from '@/app/(overview)/not-found'
 import { Phone, Email } from '@/assets'
 import Header from '@/components/hoc/header'
 import BackButton from '@/components/ui/back-button'

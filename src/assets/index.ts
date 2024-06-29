@@ -7,6 +7,7 @@ import Logout from './svg/logout.svg'
 import Phone from './svg/phone.svg'
 import ShowMoreRowDown from './svg/show-more-row-down.svg'
 import NotFoundImage from './images/not-found.png'
+import InternalServerErrorImage from './images/internal-server-error.jpg'
 
 export {
     BackRow,
@@ -18,4 +19,5 @@ export {
     Phone,
     ShowMoreRowDown,
     NotFoundImage,
+    InternalServerErrorImage,
 }
