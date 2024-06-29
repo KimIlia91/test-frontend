@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { useFormState } from "react-dom"
+import { useSession } from "next-auth/react"
+import Loading from "@/app/loading"
 import InputForm from "./input-form"
 import PasswordInput from "./password-input"
 import { Button } from "@/components/ui/button"
@@ -10,6 +12,9 @@ import { LoginState, login } from "@/services/auth-service"
 export default function LoginForm() {
     const initialState = { errors: {}, message: null }
     const [state, dispatch] = useFormState<LoginState, FormData>(login, initialState)
+    const { status } = useSession()
+
+    if (status === "loading") return <Loading />
 
     return (
         <div className="max-w-[500px] w-full rounded-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] bg-white p-4">
