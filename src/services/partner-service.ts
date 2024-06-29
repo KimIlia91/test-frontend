@@ -34,6 +34,6 @@ export async function getPartnersTablePage(paramsCursor: string, userId?: string
         fetchPartnersTable(paramsCursor, userId),
         fetchIsPartnersHasNextPage(paramsCursor)
     ])
-    // console.log(partners)
+
     return { partners, hasNextPartnersPage }
 }

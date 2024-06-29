@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { PartnersTable } from "@/lib/definitions"
-import { DEFAULT_CURSOR, ERROR_MESSAGE } from "@/lib/constants"
-import { fetchPartnersTable } from "./partner-thunk"
 import { getCurrentCursor } from "@/lib/utils"
+import { PartnersTable } from "@/lib/definitions"
+import { fetchPartnersTable } from "./partner-thunk"
+import { DEFAULT_CURSOR, ERROR_MESSAGE } from "@/lib/constants"
 
 type PartnerState = {
     data: PartnersTable[]
