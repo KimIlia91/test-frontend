@@ -1,13 +1,15 @@
 'use client'
 
 import Link from "next/link"
-import { useFormState } from "react-dom"
+import { useFormState, useFormStatus } from "react-dom"
+import Spinner from "../spinner"
 import InputForm from "./input-form"
 import PasswordInput from "./password-input"
 import { Button } from "@/components/ui/button"
 import { LoginState, login } from "@/services/auth-service"
 
 export default function LoginForm() {
+    const { pending } = useFormStatus()
     const initialState = { errors: {}, message: null }
     const [state, dispatch] = useFormState<LoginState, FormData>(login, initialState)
 
@@ -40,7 +42,7 @@ export default function LoginForm() {
                     errors={state?.errors?.password}
                 />
                 <Button variant={"registerForm"} type="submit">
-                    Войти
+                    {pending ? <Spinner /> : "Войти"}
                 </Button>
             </form>
             <Link href={`/register`} className="block text-center mt-4 hover:underline text-gray-500 hover:text-black transition-all duration-300">

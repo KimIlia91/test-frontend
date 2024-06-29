@@ -1,15 +1,17 @@
 'use client'
 
-import { useFormState } from "react-dom"
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { useFormState, useFormStatus } from "react-dom"
+import Spinner from "../spinner"
 import InputForm from "./input-form"
 import PasswordInput from "./password-input"
+import { Button } from "@/components/ui/button"
 import { AuthState, register } from "@/services/auth-service"
-import Link from "next/link"
 
 export default function RegisterForm() {
     const initialState = { errors: {}, message: null }
     const [state, dispatch] = useFormState<AuthState, FormData>(register, initialState)
+    const { pending } = useFormStatus()
 
     return (
         <div className="max-w-[500px] w-full rounded-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] bg-white p-4">
@@ -48,7 +50,7 @@ export default function RegisterForm() {
                     errors={state.errors?.confirmPassword}
                 />
                 <Button variant={"registerForm"} type="submit">
-                    Зарегистрироваться
+                    {pending ? <Spinner /> : "Зарегистрироваться"}
                 </Button>
             </form> 
             <Link href={`/login`} className="block text-center mt-4 hover:underline text-gray-500 hover:text-black transition-all duration-300">
