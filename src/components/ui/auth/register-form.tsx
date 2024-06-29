@@ -2,11 +2,10 @@
 
 import Link from "next/link"
 import { useFormState, useFormStatus } from "react-dom"
-import Spinner from "../spinner"
 import InputForm from "./input-form"
 import PasswordInput from "./password-input"
-import { Button } from "@/components/ui/button"
 import { AuthState, register } from "@/services/auth-service"
+import SubmitButton from "./submit-button"
 
 export default function RegisterForm() {
     const initialState = { errors: {}, message: null }
@@ -49,9 +48,7 @@ export default function RegisterForm() {
                     lable="Подтверждение пароля"
                     errors={state.errors?.confirmPassword}
                 />
-                <Button variant={"registerForm"} type="submit">
-                    {pending ? <Spinner /> : "Зарегистрироваться"}
-                </Button>
+                <SubmitButton title="Зарегистрироваться" />
             </form> 
             <Link href={`/login`} className="block text-center mt-4 hover:underline text-gray-500 hover:text-black transition-all duration-300">
                 Войти

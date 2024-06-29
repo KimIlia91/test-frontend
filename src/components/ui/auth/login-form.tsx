@@ -1,11 +1,10 @@
 'use client'
 
 import Link from "next/link"
-import { LoaderIcon } from "lucide-react"
-import { useFormState, useFormStatus } from "react-dom"
+import { useFormState } from "react-dom"
 import InputForm from "./input-form"
+import SubmitButton from "./submit-button"
 import PasswordInput from "./password-input"
-import { Button } from "@/components/ui/button"
 import { LoginState, login } from "@/services/auth-service"
 
 export default function LoginForm() {
@@ -40,21 +39,11 @@ export default function LoginForm() {
                     autoComplete="password"
                     errors={state?.errors?.password}
                 />
-                <SubmitButton />
+                <SubmitButton title="Войти" />
             </form>
             <Link href={`/register`} className="block text-center mt-4 hover:underline text-gray-500 hover:text-black transition-all duration-300">
                 Зарегистрироваться
             </Link>
         </div>
-    )
-}
-
-function SubmitButton() {
-    const { pending } = useFormStatus()
-
-    return (
-        <Button variant={"registerForm"} type="submit" disabled={pending}>
-            {pending ? <LoaderIcon /> : "Войти"}
-        </Button>
     )
 }
