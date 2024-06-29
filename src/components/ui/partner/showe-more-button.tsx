@@ -13,7 +13,6 @@ const ShoweMoreButton = () => {
     const dispatch = useDispatch()
     const { loading, hasNextPage, cursor } = useSelector((state: RootState) => state.partnersTable)
     const session = useSession()
-    console.log(session)
 
     const request = () => {
         if (session.status === "authenticated") {
@@ -34,7 +33,7 @@ const ShoweMoreButton = () => {
         event.preventDefault()
         request()
     }
-    console.log(hasNextPage)
+    
     return (
         <Button
             variant={"showMore"}

@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { getPartnersTablePage } from "@/services/partner-service"
-import { useSession } from "next-auth/react"
 
 export const fetchPartnersTable = createAsyncThunk(
     'partnersTable/fetchPartnersTable',

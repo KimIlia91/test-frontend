@@ -20,7 +20,7 @@ const initialState: PartnerState = {
     cursor: DEFAULT_CURSOR
 }
 
-type SetPartnersTableAction = {
+type PartnersTableAction = {
     partners: PartnersTable[]
     hasNextPage: boolean
 }
@@ -35,7 +35,7 @@ const partnersTableSlice = createSlice({
                 loading: action.payload
             }
         },
-        setPartnersTable: (state, action: PayloadAction<SetPartnersTableAction>) => {
+        setPartnersTable: (state, action: PayloadAction<PartnersTableAction>) => {
             const newPartners = action.payload.partners.filter(newPartner => (
                 !state.data.some(existingPartner => existingPartner.id === newPartner.id)
             ))
