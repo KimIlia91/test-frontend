@@ -1,8 +1,8 @@
 'use client'
 
 import Link from "next/link"
+import { LoaderIcon } from "lucide-react"
 import { useFormState, useFormStatus } from "react-dom"
-import Spinner from "../spinner"
 import InputForm from "./input-form"
 import PasswordInput from "./password-input"
 import { Button } from "@/components/ui/button"
@@ -53,8 +53,8 @@ function SubmitButton() {
     const { pending } = useFormStatus()
 
     return (
-        <Button variant={"registerForm"} type="submit">
-            {pending ? <Spinner /> : "Войти"}
+        <Button variant={"registerForm"} type="submit" disabled={pending}>
+            {pending ? <LoaderIcon /> : "Войти"}
         </Button>
     )
 }
