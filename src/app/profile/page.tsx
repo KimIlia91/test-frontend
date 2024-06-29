@@ -1,10 +1,25 @@
 import Image from "next/image"
+import { Metadata } from 'next'
 import { signOut } from "@/auth"
 import { Email, Logout } from "@/assets"
 import Header from "@/components/hoc/header"
 import { Button } from "@/components/ui/button"
 import BackButton from "@/components/ui/back-button"
 import { featchUserProfile } from "@/data/repository"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const profile = await featchUserProfile();
+
+  if (!profile) {
+    return {
+      title: 'Профиль не найден',
+    }
+  }
+
+  return {
+    title: `${profile.name}`,
+  }
+}
 
 export default async function ProfilePage() {
   const user = await featchUserProfile()

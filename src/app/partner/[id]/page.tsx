@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   if (!partner) {
     return {
-      title: 'Не найдено',
+      title: 'Партнёр не найден',
     }
   }
 
