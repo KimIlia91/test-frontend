@@ -3,16 +3,12 @@ import Header from "@/components/hoc/header"
 import ProfilePanel from "@/components/ui/profile-panel"
 import PartnerTable from "@/components/ui/partner/partner-table"
 import ShoweMoreButton from "@/components/ui/partner/showe-more-button"
-import SessionProviderWrapper from "@/components/hoc/session-provider"
-import { auth } from "@/auth"
 
 export const metadata: Metadata = {
     title: 'Наша команда',
 }
 
-export default async function PartnersPage() {
-    const session = await auth()
-    
+export default async function PartnersPage() {    
     return (
         <main className="pb-[69px]">
             <Header>
@@ -24,10 +20,8 @@ export default async function PartnersPage() {
             </Header>
             <div className="container">
                 <div className="flex flex-col items-center gap-14">
-                    <SessionProviderWrapper session={session}>
-                        <PartnerTable />
-                        <ShoweMoreButton />
-                    </SessionProviderWrapper>
+                    <PartnerTable />
+                    <ShoweMoreButton />
                 </div>
             </div>
         </main>
