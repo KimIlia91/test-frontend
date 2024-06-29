@@ -2,11 +2,11 @@
 
 import { sql } from "@vercel/postgres"
 import { unstable_noStore as noStore } from 'next/cache'
-import { Partner, PartnersTable, User, UserProfile } from "@/lib/definitions"
 import { auth } from "@/auth";
+import { DEFAULT_LIMIT } from "@/lib/constants";
+import { Partner, PartnersTable, User, UserProfile } from "@/lib/definitions"
 
-
-export async function getUserByEmail(email: string): Promise<User | undefined> {
+export async function getUserByEmail(email: string) {
     noStore()
     try {
       const user = await sql<User>`SELECT * FROM test_users WHERE email=${email}`
@@ -30,7 +30,11 @@ export async function addUser(name: string, email: string, hashPassword: string)
     }
 }
 
-export async function fetchPartnersTable(userId: string, offset: number) : Promise<PartnersTable[]> {
+export async function fetchPartnersTable(
+    cursor: string,
+    userId: string,
+    limit: number = DEFAULT_LIMIT
+) {
     noStore()
     try {
         const partners = await sql<PartnersTable>`
@@ -44,37 +48,37 @@ export async function fetchPartnersTable(userId: string, offset: number) : Promi
                 CASE WHEN uf.user_id IS NOT NULL THEN TRUE ELSE FALSE END AS is_favorite
             FROM partners p
             LEFT JOIN users_favorites uf ON p.id = uf.partner_id AND uf.user_id = ${userId}
-            ORDER BY p.name
-            OFFSET ${offset}
-            LIMIT 8;
+            WHERE p.id > ${cursor}
+            ORDER BY p.id
+            LIMIT ${limit};
         `
-        
+
         return partners.rows
     } catch (error) {
         console.error('Database Error:', error)
         throw new Error('Failed to fetch partners table.')
     }
-    
 }
 
-export async function fetchPartnersPerPage(offset: number) {
+export async function fetchIsPartnersHasNextPage(
+    cursor: string,
+    limit: number = DEFAULT_LIMIT
+) {
     noStore()
     try {
-        const count = await sql`
+        const result = await sql`
             SELECT COUNT(*)
-            FROM(
-                SELECT
-                    p.id,
-                    p.name
+            FROM (
+                SELECT 1
                 FROM partners p
-                LEFT JOIN users_favorites uf ON p.id = uf.partner_id
-                ORDER BY p.name
-                OFFSET ${offset}
-                LIMIT 9
-            ) as subquery
+                WHERE p.id > ${cursor}
+                ORDER BY p.id
+                LIMIT ${limit + 1}
+            ) AS subquery;
         `
         
-        return Number(count.rows[0].count)
+        const rowCount = result.rows[0].count ?? 0
+        return rowCount > limit
     } catch(error) {
         console.error('Database Error:', error)
         throw new Error('Failed to fetch partners table.')
@@ -110,7 +114,6 @@ export async function deleteUserFavorite(userId: string, partnerId: string) {
 export async function fetchPartnerById(id: string) {
     noStore()
     try {
-        console.log(id)
         const partner = await sql<Partner>`
             SELECT 
                 p.id,

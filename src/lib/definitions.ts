@@ -31,3 +31,7 @@ export type Partner = {
     image: string
     description: string
 }
+
+export type HasNextPartnersPage = {
+    hasNextPage: boolean
+}

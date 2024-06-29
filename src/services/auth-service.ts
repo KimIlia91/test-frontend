@@ -3,9 +3,9 @@
 import { redirect } from 'next/navigation'
 import { AuthError } from 'next-auth'
 import bcrypt from 'bcrypt'
-import { loginValidator, registerValidator } from '../lib/auth/auth-validator'
-import { signIn } from '../auth'
+import { signIn } from '@/auth'
 import { addUser, getUserByEmail } from '@/data/repository'
+import { loginValidator, registerValidator } from '@/lib/auth/auth-validator'
 
 export type AuthState = {
     errors?: { 

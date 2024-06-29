@@ -1,12 +1,7 @@
 'use server'
 
 import { auth } from "@/auth"
-import { createUserFavorite, deleteUserFavorite, fetchPartnersPerPage } from "@/data/repository"
-
-export async function isLastPartners(offset: number) : Promise<boolean> {
-    const count = await fetchPartnersPerPage(offset)
-    return count > 8
-}
+import { createUserFavorite, deleteUserFavorite, fetchIsPartnersHasNextPage, fetchPartnersTable } from "@/data/repository"
 
 export async function setIsFavorite(partnerId: string) {
     try {
@@ -30,4 +25,15 @@ export async function deleteIsFavorite(partnerId: string) {
         console.error('Failed to update favorite status:', error)
         return { error: "Error while fetching data" }
     }
+}
+
+export async function getPartnersTablePage(paramsCursor: string, userId?: string | null) {
+    if (!userId) throw new Error("userId is required")
+
+    const [partners, hasNextPartnersPage] = await Promise.all([
+        fetchPartnersTable(paramsCursor, userId),
+        fetchIsPartnersHasNextPage(paramsCursor)
+    ])
+    // console.log(partners)
+    return { partners, hasNextPartnersPage }
 }

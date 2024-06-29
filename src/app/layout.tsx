@@ -1,7 +1,7 @@
-import { SessionProvider } from "next-auth/react";
-import type { Metadata } from "next"
-import { roboto } from "@/fonts"
-import "../styles/globals.css"
+import type { Metadata } from "next";
+import { roboto } from "@/fonts";
+import "../styles/globals.css";
+import { StoreProvider } from "@/store/store-provider";
 
 export const metadata: Metadata = {
   title: {
@@ -20,9 +20,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={roboto.className}>
-        <SessionProvider>
+        <StoreProvider>
           {children}
-        </SessionProvider>
+        </StoreProvider>
       </body>
     </html>
   );

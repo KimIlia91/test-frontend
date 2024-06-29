@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { useFormState, useFormStatus } from "react-dom"
+import { useFormState } from "react-dom"
 import InputForm from "./input-form"
 import PasswordInput from "./password-input"
 import { Button } from "@/components/ui/button"
@@ -9,9 +9,8 @@ import { LoginState, login } from "@/services/auth-service"
 
 export default function LoginForm() {
     const initialState = { errors: {}, message: null }
-    const { pending } = useFormStatus()
     const [state, dispatch] = useFormState<LoginState, FormData>(login, initialState)
-    console.log(pending)
+
     return (
         <div className="max-w-[500px] w-full rounded-[16px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.08)] bg-white p-4">
             <h1 className="text-xl mb-4 text-center font-bold">Вход</h1>
@@ -37,9 +36,10 @@ export default function LoginForm() {
                     name="password"
                     placeholder="******"
                     lable="Пароль"
+                    autoComplete="password"
                     errors={state?.errors?.password}
                 />
-                <Button variant={"registerForm"} type="submit" disabled={pending}>
+                <Button variant={"registerForm"} type="submit">
                     Войти
                 </Button>
             </form>
